@@ -1,0 +1,26 @@
+.header{
+    display: flex;
+    flex-direction: row;
+    background-color: #1976d2;
+    padding: 12px;
+    align-items: center;
+    box-shadow: 0 3px 5px 0 rgb(0 0 0 / 30%);
+}
+
+.logo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo__image{
+    width: 100px;
+}
+
+.logo__title{
+    font-size: 1.8rem;
+    margin-left: 15px;
+    color: #fff;
+    font-family: 'Calibri'
+}
