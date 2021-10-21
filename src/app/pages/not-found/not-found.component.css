@@ -1,0 +1,25 @@
+.not_found{
+    position: absolute;
+	display: flex;
+    top: 70px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-weight: bold;
+    font-size: 6rem;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+}
+
+.not_found__code{
+    color: #fff;
+    margin-right: 15px;
+}
+
+.not_found__text{
+    padding: 15px;
+    border-radius: 15px;
+    background-color: #FF9903;
+    text-align: center;
+}
