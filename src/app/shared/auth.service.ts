@@ -1,8 +1,7 @@
+import { CommonService } from './common.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { tap } from 'rxjs/operators';
 
 export interface UserCredentials {
   email: string,
@@ -14,11 +13,24 @@ export interface UserCredentials {
 })
 export class AuthService {
 
-  constructor(private httpClient: HttpClient) { }
+  token?: string;
 
-  login(credentials: UserCredentials): Observable<string>{
-    console.log(credentials);
-    return this.httpClient.post<string>(environment.apiUrl + 'users/login/', credentials)
-      .pipe(tap(token => console.log("TOKEN", token)));
+  constructor(private httpClient: HttpClient,
+    private commonService: CommonService) { }
+
+  login(credentials: UserCredentials, onSuccess: Function, onFailure: Function){
+    this.commonService.setIsLoading(true)
+    this.httpClient.post<any>(environment.apiUrl + 'users/login/', credentials)
+      .subscribe({
+        next: (response: any) => {
+          this.token = response.token;
+          this.commonService.setIsLoading(false)
+          onSuccess();
+        },
+        error: (e) => {
+          this.commonService.setIsLoading(false)
+          onFailure(e.error.message);
+        }
+      })
   }
 }

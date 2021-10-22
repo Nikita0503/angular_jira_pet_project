@@ -1,6 +1,8 @@
+import { UserService } from './../../shared/user.service';
 import { AuthService, UserCredentials } from './../../shared/auth.service';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -9,10 +11,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent {
 
-    isLoading: boolean = false;
     loginForm: FormGroup;
 
-    constructor(private fb: FormBuilder, private authService: AuthService) {
+    constructor(private fb: FormBuilder,
+      private authService: AuthService,
+      private userService: UserService,
+      private snackBar: MatSnackBar) {
       this.loginForm = this.fb.group({
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, Validators.minLength(6)]]
@@ -29,8 +33,12 @@ export class LoginComponent {
         email: this.loginForm.get('email')?.value,
         password: this.loginForm.get('password')?.value
       }
-      this.authService.login(creadentials).subscribe(
-      () => console.log('DONE'),
-      (error) => console.log('ERROR', error));
+      this.authService.login(creadentials,
+          () => {
+            this.userService.fetchCurrentUser();
+          },
+          (errorMessage: string) => {
+            this.snackBar.open(errorMessage, "OK", {duration: 2000})
+          });
     }
 }

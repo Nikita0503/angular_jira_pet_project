@@ -1,3 +1,4 @@
+import { CommonService } from './../../shared/common.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -5,11 +6,13 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
-  constructor() { }
+  constructor(private commomService: CommonService) { }
 
-  ngOnInit(): void {
+
+  get isLoading(){
+    return this.commomService.isLoading
   }
 
 }
