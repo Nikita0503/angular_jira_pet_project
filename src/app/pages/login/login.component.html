@@ -1,1 +1,33 @@
-<p>login works!</p>
+<div class="container">
+    <form [formGroup]="loginForm" novalidate>
+        <div class="form">
+            <span class="form__title">Enter your credentials</span>
+            <input
+              formControlName="email"
+              type="email"
+              placeholder="email"
+              class="form__input"
+              [class.form__input_red]="_invalidEmail" />
+            <input
+              formControlName="password"
+              type="password"
+              placeholder="password"
+              class="form__input"
+              [class.form__input_red]="_invalidPassword"/>
+            <div
+                class="login_button"
+                [class.login_button_disabled]="_disabledLogin"
+                (click)="_disabledLogin && login()">
+                <span class="login_button__text">Login</span>
+            </div>
+            <div class="alerts">
+              <span
+                *ngIf="_invalidEmail"
+                class="alerts__text">Email is not correct.</span>
+              <span
+                *ngIf="_invalidPassword"
+                class="alerts__text">Password should be more than 6 characters.</span>
+            </div>
+        </div>
+    </form>
+</div>

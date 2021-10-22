@@ -1,0 +1,98 @@
+.container{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.form{
+    display: flex;
+    flex: 1;
+    padding: 20px;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+    justify-content: center;
+    align-self: center;
+    width: 300px;
+    box-shadow: 0px 0px 15px rgb(0 0 0 / 12%);
+    border-radius: 3px;
+    background-color: #fff;
+}
+
+.form__title{
+    font-size: 18px;
+    color: #5E6C84;
+    margin-bottom: 30px;
+}
+
+.form__input{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border: 1px solid #5E6C84;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    height: 30px;
+    width: 200px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 2px;
+    transition: 0.3s;
+    outline-color: #1976d2;
+    cursor: pointer;
+}
+
+.form__input:hover{
+    background-color: #f0f0f0;
+    transition: 0.3s;
+}
+
+.form__input_red{
+    outline-color: red;
+    border: 1px solid red;
+}
+
+.login_button{
+    background-color: #1976d2;
+    border-radius: 5px;
+    margin-top: 10px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.login_button:hover{
+    transition: 0.3s;
+    background-color: #125597;
+}
+
+.login_button_disabled{
+  background-color: rgb(156, 156, 156);
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+.login_button__text{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+    font-size: 14px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.alerts{
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+}
+
+.alerts__text{
+  margin-top: 5px;
+  color: red;
+  text-align: center;
+}
