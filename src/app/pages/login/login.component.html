@@ -2,32 +2,40 @@
     <form [formGroup]="loginForm" novalidate>
         <div class="form">
             <span class="form__title">Enter your credentials</span>
-            <input
-              formControlName="email"
-              type="email"
-              placeholder="email"
-              class="form__input"
-              [class.form__input_red]="_invalidEmail" />
-            <input
-              formControlName="password"
-              type="password"
-              placeholder="password"
-              class="form__input"
-              [class.form__input_red]="_invalidPassword"/>
-            <div
-                class="login_button"
-                [class.login_button_disabled]="_disabledLogin"
-                (click)="_disabledLogin && login()">
-                <span class="login_button__text">Login</span>
-            </div>
-            <div class="alerts">
-              <span
-                *ngIf="_invalidEmail"
-                class="alerts__text">Email is not correct.</span>
-              <span
-                *ngIf="_invalidPassword"
-                class="alerts__text">Password should be more than 6 characters.</span>
-            </div>
+            <mat-form-field class="form__input" appearance="fill">
+              <mat-label>Enter your email</mat-label>
+              <input
+                matInput
+                placeholder="Email"
+                formControlName="email"
+                type="email">
+                <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
+                  Email is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="loginForm.get('email')?.hasError('email')">
+                  Email is not correct
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="form__input" appearance="fill">
+              <mat-label>Enter your password</mat-label>
+              <input
+                matInput
+                placeholder="Password"
+                formControlName="password"
+                type="password">
+                <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+                  Password is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">
+                  Minimum password lenght is <strong>6</strong> symbols
+                </mat-error>
+            </mat-form-field>
+
+            <button
+                mat-raised-button color="primary"
+                [disabled]="_disabledLogin"
+                (click)="login()">Login</button>
         </div>
     </form>
 </div>

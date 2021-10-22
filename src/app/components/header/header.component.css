@@ -4,11 +4,10 @@
     padding-right: 12px;
     display: flex;
     flex-direction: row;
-    background-color: #1976d2;
+    background-color: #3F51B5;
     align-items: center;
     justify-content: space-between;
     box-shadow: 0 3px 5px 0 rgb(0 0 0 / 30%);
-    font-family: 'Calibri'
 }
 
 .logo{
@@ -26,6 +25,8 @@
     font-size: 1.8rem;
     margin-left: 15px;
     color: #fff;
+    font-family: 'Calibri';
+    margin-top: 15px;
 }
 
 .menu{

@@ -1,3 +1,4 @@
+import { AuthService, UserCredentials } from './../../shared/auth.service';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -8,28 +9,28 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent {
 
+    isLoading: boolean = false;
     loginForm: FormGroup;
 
-    constructor(private fb: FormBuilder) {
+    constructor(private fb: FormBuilder, private authService: AuthService) {
       this.loginForm = this.fb.group({
-        email: ['', Validators.email],
-        password: ['', Validators.minLength(6)]
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(6)]]
       });
     }
 
-    login(){
-      console.log(this.loginForm.get('email')?.value)
-    }
-
-    get _invalidEmail() {
-      return this.loginForm.get('email')?.invalid
-    }
-
-    get _invalidPassword() {
-      return this.loginForm.get('password')?.invalid
-    }
-
     get _disabledLogin() {
-      return this._invalidEmail || this._invalidPassword;
+      return this.loginForm.get('email')?.invalid
+        || this.loginForm.get('password')?.invalid
+    }
+
+    login(){
+      const creadentials: UserCredentials = {
+        email: this.loginForm.get('email')?.value,
+        password: this.loginForm.get('password')?.value
+      }
+      this.authService.login(creadentials).subscribe(
+      () => console.log('DONE'),
+      (error) => console.log('ERROR', error));
     }
 }
