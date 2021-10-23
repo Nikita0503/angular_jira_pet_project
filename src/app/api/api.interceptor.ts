@@ -15,7 +15,6 @@ export class ApiInterceptor implements HttpInterceptor {
         if(token){
           req = req.clone({
             headers: new HttpHeaders({
-              'Content-Type':  'application/json',
               'Authorization': 'Bearer ' + token
             })
           })

@@ -3,7 +3,13 @@
         <div class="form">
             <span class="form__title">Registration</span>
 
-            <input type="file" (change)="onImageChange($event)" placeholder="Upload file" accept=".png,.jpeg,.jpg,.gif">
+            <label class="image_picker">
+              <img *ngIf="url; else imageStub" class="image_picker__inner" [src]="imageUrl">
+              <ng-template #imageStub>
+                <span class="image_picker__text">Choose<br>avatar</span>
+              </ng-template>
+              <input type="file" class="form__picker" (change)="onImageChange($event)" placeholder="Upload file" accept=".png,.jpeg,.jpg,.gif">
+            </label>
 
             <mat-form-field class="form__input" appearance="fill">
               <mat-label>Enter your name</mat-label>

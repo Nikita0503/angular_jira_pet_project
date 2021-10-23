@@ -12,6 +12,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 })
 export class RegistrationComponent {
 
+  url?: string;
   avatar: File = new File([], '');
   registrationData?: RegistrationData;
   matcher = new PasswordsErrorStateMatcher();
@@ -44,10 +45,20 @@ export class RegistrationComponent {
        return isInvalid;
     }
 
+    get imageUrl(){
+      return this.url
+    }
+
     onImageChange(event: any){
       this.avatar = event.target.files[0];
-      console.log("FILE", event.target.files[0])
-
+      var reader = new FileReader();
+      reader.onload = (event: any) => {
+        this.url = event.target.result;
+      };
+      reader.onerror = (event: any) => {
+        console.log("File could not be read: " + event.target.error.code);
+      };
+      reader.readAsDataURL(event.target.files[0]);
     }
 
     registration(){
@@ -58,7 +69,6 @@ export class RegistrationComponent {
         role: this.registrationForm.get('role')?.value,
         avatar: this.avatar
       }
-      //console.log(this.registrationData)
       this.authService.registration(this.registrationData)
     }
 }
