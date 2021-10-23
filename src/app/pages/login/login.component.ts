@@ -24,8 +24,7 @@ export class LoginComponent {
     }
 
     get isDisabledLogin() {
-      return this.loginForm.get('email')?.invalid
-        || this.loginForm.get('password')?.invalid
+      return this.loginForm.invalid
     }
 
     login(){

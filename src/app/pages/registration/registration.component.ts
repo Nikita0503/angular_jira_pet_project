@@ -22,10 +22,9 @@ export class RegistrationComponent {
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, Validators.minLength(6)]],
         repeatPassword: ['', [Validators.required, Validators.minLength(6)]],
+        selectRole: ['', [Validators.required]]
       }, {validators: samePasswordsValidator});
     }
-
-
 
     get isDisabledRegistration() {
       return this.registrationForm.invalid
@@ -43,15 +42,12 @@ export class RegistrationComponent {
     }
 
     registration(){
-
+      console.log(this.registrationForm.value)
     }
 }
 
 class PasswordsErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    let isInvalid: boolean = false;
-    //!!control?.parent?.hasError('notSame')
-
     return !!control?.parent?.hasError('notSame') && !!control?.parent?.get('repeatPassword')?.value;
   }
 }

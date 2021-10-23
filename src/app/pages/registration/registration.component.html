@@ -60,6 +60,17 @@
                 </mat-error>
             </mat-form-field>
 
+            <mat-form-field appearance="fill" class="form__input">
+              <mat-label>Choose the role</mat-label>
+              <mat-select formControlName="selectRole">
+                <mat-option value="USER">User</mat-option>
+                <mat-option value="ADMIN">Admin</mat-option>
+              </mat-select>
+              <mat-error *ngIf="registrationForm.get('repeatPassword')?.hasError('required')">
+                Role is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+
             <button
                 mat-raised-button color="primary"
                 [disabled]="isDisabledRegistration"
