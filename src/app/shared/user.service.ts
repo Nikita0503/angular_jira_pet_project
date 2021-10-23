@@ -11,6 +11,14 @@ export interface User {
   avatar: string
 }
 
+export interface RegistrationData {
+  name: string,
+  email: string,
+  password: string,
+  role: string,
+  avatar: File
+}
+
 @Injectable({
   providedIn: 'root'
 })

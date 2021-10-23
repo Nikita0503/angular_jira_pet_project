@@ -40,7 +40,7 @@ import { ApiInterceptor } from './api/api.interceptor';
     MatProgressSpinnerModule,
     MatProgressBarModule,
     MatSnackBarModule,
-    MatSelectModule
+    MatSelectModule,
   ],
   providers: [
     {

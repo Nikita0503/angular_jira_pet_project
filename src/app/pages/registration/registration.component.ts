@@ -1,6 +1,7 @@
+import { RegistrationData } from './../../shared/user.service';
 import { AuthService } from './../../shared/auth.service';
 import { FormBuilder, FormGroup, ValidatorFn, Validators, AbstractControl, ValidationErrors, FormControl, FormGroupDirective, NgForm } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorStateMatcher } from '@angular/material/core';
 
@@ -11,18 +12,20 @@ import { ErrorStateMatcher } from '@angular/material/core';
 })
 export class RegistrationComponent {
 
+  avatar: File = new File([], '');
+  registrationData?: RegistrationData;
   matcher = new PasswordsErrorStateMatcher();
   registrationForm: FormGroup;
 
   constructor(private fb: FormBuilder,
       private authService: AuthService,
       private snackBar: MatSnackBar) {
-      this.registrationForm = this.fb.group({
-        name: ['', [Validators.required]],
-        email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(6)]],
-        repeatPassword: ['', [Validators.required, Validators.minLength(6)]],
-        selectRole: ['', [Validators.required]]
+        this.registrationForm = this.fb.group({
+          name: ['', [Validators.required]],
+          email: ['', [Validators.required, Validators.email]],
+          password: ['', [Validators.required, Validators.minLength(6)]],
+          repeatPassword: ['', [Validators.required, Validators.minLength(6)]],
+          role: ['', [Validators.required]]
       }, {validators: samePasswordsValidator});
     }
 
@@ -41,8 +44,22 @@ export class RegistrationComponent {
        return isInvalid;
     }
 
+    onImageChange(event: any){
+      this.avatar = event.target.files[0];
+      console.log("FILE", event.target.files[0])
+
+    }
+
     registration(){
-      console.log(this.registrationForm.value)
+      this.registrationData = {
+        email: this.registrationForm.get('email')?.value,
+        name: this.registrationForm.get('name')?.value,
+        password: this.registrationForm.get('password')?.value,
+        role: this.registrationForm.get('role')?.value,
+        avatar: this.avatar
+      }
+      //console.log(this.registrationData)
+      this.authService.registration(this.registrationData)
     }
 }
 
@@ -55,6 +72,5 @@ class PasswordsErrorStateMatcher implements ErrorStateMatcher {
 const samePasswordsValidator: ValidatorFn = (group: AbstractControl): ValidationErrors | null => {
   const password = group.get('password')?.value;
   const repeatPassword = group.get('repeatPassword')?.value;
-  console.log(password == repeatPassword ? null : { notSame: true })
   return password == repeatPassword ? null : { notSame: true }
 };

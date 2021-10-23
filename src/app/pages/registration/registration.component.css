@@ -30,6 +30,10 @@
 }
 
 .form__input{
-width: 100%;
-padding: 5px;
+  width: 100%;
+  padding: 5px;
+}
+
+.form__picker{
+  margin-bottom: 25px;
 }
