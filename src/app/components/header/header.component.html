@@ -5,14 +5,23 @@
             src="assets/logo.png">
         <h1 class="logo__title">Jira pet</h1>
     </div>
-    <div class="menu">
+    <div class="menu" *ngIf="isAuthorized; else authButtons">
+      <span class="profile__text">{{username}}</span>
+      <img
+        class="profile__image"
+        [src]="avatar">
+    </div>
+
+    <ng-template #authButtons>
+      <div class="menu">
         <div class="menu_button">
-            <a routerLink="/login"><span class="menu_button__text">LOGIN</span></a>
+          <a routerLink="/login"><span class="menu_button__text">LOGIN</span></a>
         </div>
         <div class="menu_button">
             <a routerLink="/registration"><span class="menu_button__text">SIGN UP</span></a>
         </div>
-    </div>
+      </div>
+    </ng-template>
 </div>
 <div *ngIf="isLoading" class="progress_bar">
   <mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
