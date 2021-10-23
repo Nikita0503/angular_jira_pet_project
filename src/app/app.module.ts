@@ -9,13 +9,14 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ApiInterceptor } from './api/api.interceptor';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,13 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatProgressBarModule,
     MatSnackBarModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ApiInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

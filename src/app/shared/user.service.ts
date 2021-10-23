@@ -17,23 +17,13 @@ export interface User {
 export class UserService {
   user?: User;
 
-  constructor(private httpClient: HttpClient, private authService: AuthService) { }
+  constructor(private httpClient: HttpClient) { }
 
   fetchCurrentUser(){
-    const headers = new HttpHeaders({ //TODO: make interceptors
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${this.authService.token}`,
-});
-    this.httpClient.post<User>(environment.apiUrl + 'users/me/', null, {
-      headers: headers})
-      .subscribe({
-        next: (response: any) => {
+    this.httpClient.post<any>(environment.apiUrl + 'users/me/', null)
+      .subscribe((response: any) => {
           this.user = response.user;
           console.log("USER => ", this.user);
-        },
-        error: (e) => {
-          console.log("fetchCurrentUser => ", e)
-        }
       })
   }
 }

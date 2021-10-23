@@ -15,20 +15,16 @@ export class AuthService {
 
   token?: string;
 
-  constructor(private httpClient: HttpClient,
-    private commonService: CommonService) { }
+  constructor(private httpClient: HttpClient) { }
 
   login(credentials: UserCredentials, onSuccess: Function, onFailure: Function){
-    this.commonService.setIsLoading(true)
     this.httpClient.post<any>(environment.apiUrl + 'users/login/', credentials)
       .subscribe({
         next: (response: any) => {
           this.token = response.token;
-          this.commonService.setIsLoading(false)
           onSuccess();
         },
         error: (e) => {
-          this.commonService.setIsLoading(false)
           onFailure(e.error.message);
         }
       })
