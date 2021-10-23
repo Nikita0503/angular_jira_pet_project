@@ -15,7 +15,6 @@ export class HeaderComponent {
     private authService: AuthService,
     private userService: UserService) { }
 
-
   get isLoading(){
     return this.commomService.isLoading
   }

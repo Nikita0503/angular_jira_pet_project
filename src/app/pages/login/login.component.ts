@@ -23,7 +23,7 @@ export class LoginComponent {
       });
     }
 
-    get _disabledLogin() {
+    get isDisabledLogin() {
       return this.loginForm.get('email')?.invalid
         || this.loginForm.get('password')?.invalid
     }
