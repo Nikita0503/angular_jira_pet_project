@@ -42,13 +42,14 @@
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  background-color: #0f51c4;
+  background-color: #3F51B5;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
   cursor: pointer;
   transition: 200ms;
+  box-shadow: 0 3px 5px 0 rgb(0 0 0 / 30%);
 }
 
 .image_picker:hover{
