@@ -1,0 +1,80 @@
+<div class="container">
+  <div class="project_list_container">
+    <h1>Projects</h1>
+    <button
+        class="create_project_button"
+        mat-raised-button color="primary">Create new project</button>
+    <div>
+      <mat-accordion>
+        <mat-expansion-panel *ngFor="let project of projects">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{project.title}}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-panel-description>
+            {{project.description}}
+          </mat-panel-description>
+          <div>
+            <button class="project_button_edit" mat-stroked-button color="primary">Edit</button>
+            <button class="project_button_delete" mat-stroked-button color="warn">Delete</button>
+          </div>
+          <div class="project_description">
+            <button mat-button class="description_item">
+              <div class="description_item__border">
+                <span class="description_item__count">{{project.users.length}}</span>
+              </div>
+              <span class="description_item__title">Members</span>
+            </button>
+            <button mat-button class="description_item">
+              <div class="description_item__border">
+                <span class="description_item__count">{{project.tasksCount}}</span>
+              </div>
+              <span class="description_item__title">Tasks</span>
+            </button>
+          </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Self aware panel
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <mat-panel-description>
+            Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне.
+            Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века.
+            В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов,
+            используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков,
+            но и перешагнул в электронный дизайн.
+            Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и,
+            в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.
+          </mat-panel-description>
+
+          <div>
+            <button class="project_button_edit" mat-stroked-button color="primary">Edit</button>
+            <button class="project_button_delete" mat-stroked-button color="warn">Delete</button>
+          </div>
+
+          <div class="project_description">
+            <button mat-button class="description_item">
+              <div class="description_item__border">
+                <span class="description_item__count">5</span>
+              </div>
+              <span class="description_item__title">Members</span>
+            </button>
+
+            <button mat-button class="description_item">
+              <div class="description_item__border">
+                <span class="description_item__count">12</span>
+              </div>
+              <span class="description_item__title">Tasks</span>
+            </button>
+          </div>
+
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+</div>

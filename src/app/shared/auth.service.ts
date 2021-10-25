@@ -1,5 +1,4 @@
 import { RegistrationData } from './user.service';
-import { CommonService } from './common.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';

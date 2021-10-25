@@ -18,6 +18,10 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { ApiInterceptor } from './api/api.interceptor';
+import { ProjectListComponent } from './pages/project-list/project-list.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -27,6 +31,7 @@ import { ApiInterceptor } from './api/api.interceptor';
     RegistrationComponent,
     HeaderComponent,
     NotFoundComponent,
+    ProjectListComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,6 +46,9 @@ import { ApiInterceptor } from './api/api.interceptor';
     MatProgressBarModule,
     MatSnackBarModule,
     MatSelectModule,
+    MatExpansionModule,
+    MatMenuModule,
+    MatIconModule
   ],
   providers: [
     {
