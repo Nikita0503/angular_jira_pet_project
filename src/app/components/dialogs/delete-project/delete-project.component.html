@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Confirm deleting?</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <h3>Are you sure that you wanna delete <strong>{{data}}</strong> project?</h3>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onDeclineClick()">No</button>
+  <button mat-button (click)="onConfirmClick()" [mat-dialog-close]="data" cdkFocusInitial>Yes</button>
+</div>

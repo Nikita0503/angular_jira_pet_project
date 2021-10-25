@@ -18,8 +18,8 @@ export class LoginComponent {
       private commonService: CommonService,
       private router: Router) {
       this.loginForm = this.fb.group({
-        email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(6)]]
+        email: ['mail_2@gmail.com', [Validators.required, Validators.email]],
+        password: ['qwerty', [Validators.required, Validators.minLength(6)]]
       });
     }
 

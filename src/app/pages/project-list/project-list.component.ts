@@ -1,6 +1,8 @@
-import { ProjectsService } from './../../shared/projects.service';
+import { DeleteProjectComponent } from './../../components/dialogs/delete-project/delete-project.component';
+import { Project, ProjectsService } from './../../shared/projects.service';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from './../../shared/user.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-project-list',
@@ -10,7 +12,8 @@ import { UserService } from './../../shared/user.service';
 export class ProjectListComponent implements OnInit {
 
   constructor(private userService: UserService,
-    private projectsService: ProjectsService) { }
+    private projectsService: ProjectsService,
+    public dialog: MatDialog) { }
 
   ngOnInit() {
     this.userService.fetchCurrentUser();
@@ -21,4 +24,14 @@ export class ProjectListComponent implements OnInit {
     return this.projectsService.projects
   }
 
+  openConfirmDialog(project: Project){
+    let dialogRef = this.dialog.open(DeleteProjectComponent, {
+      data: project.title
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.projectsService.deleteProject(project.id);
+      }
+    })
+  }
 }

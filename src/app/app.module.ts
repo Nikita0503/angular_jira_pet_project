@@ -22,6 +22,8 @@ import { ProjectListComponent } from './pages/project-list/project-list.componen
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DeleteProjectComponent } from './components/dialogs/delete-project/delete-project.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import { MatIconModule } from '@angular/material/icon';
     HeaderComponent,
     NotFoundComponent,
     ProjectListComponent,
+    DeleteProjectComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,7 +51,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatSelectModule,
     MatExpansionModule,
     MatMenuModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule
   ],
   providers: [
     {
