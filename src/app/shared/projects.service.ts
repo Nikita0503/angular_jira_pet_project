@@ -42,7 +42,7 @@ export class ProjectsService {
   deleteProject(id: number){
     this.httpClient.delete<any>(environment.apiUrl + `projects/${id}/`)
       .subscribe({
-        next: (response: any) => {
+        next: (response: any) => { //TODO: refactor for finding by index, not filter!
           if(response.deleted){
             this.projects = this.projects.filter((project: Project) => project.id != id);
           }
@@ -50,4 +50,18 @@ export class ProjectsService {
       })
   }
 
+  editProject(editedProject: Project){ //TODO: refactor title and description names in HTML, make description TextArea
+    console.log(editedProject)
+    this.httpClient.put<any>(environment.apiUrl + `projects/${editedProject.id}`, editedProject)
+      .subscribe({
+        next: (response: any) => {
+          this.projects = this.projects.map((project: Project) => {
+            if(project.id == response.project.id){
+              return response.project
+            }
+            return project;
+          })
+        }
+      })
+  }
 }

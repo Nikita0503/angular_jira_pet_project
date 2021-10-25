@@ -16,9 +16,12 @@
             {{project.description}}
           </mat-panel-description>
           <div>
-            <button class="project_button_edit" mat-stroked-button color="primary">Edit</button>
             <button
-              (click)="openConfirmDialog(project)"
+              (click)="openEditingDialog(project)"
+              class="project_button_edit"
+              mat-stroked-button color="primary">Edit</button>
+            <button
+              (click)="openConfirmDeletingDialog(project)"
               class="project_button_delete"
               mat-stroked-button color="warn">Delete</button>
           </div>

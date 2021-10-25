@@ -24,6 +24,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DeleteProjectComponent } from './components/dialogs/delete-project/delete-project.component';
+import { EditProjectComponent } from './components/dialogs/edit-project/edit-project.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { DeleteProjectComponent } from './components/dialogs/delete-project/dele
     NotFoundComponent,
     ProjectListComponent,
     DeleteProjectComponent,
+    EditProjectComponent,
   ],
   imports: [
     BrowserModule,

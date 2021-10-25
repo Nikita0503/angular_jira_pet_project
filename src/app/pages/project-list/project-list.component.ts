@@ -1,3 +1,4 @@
+import { EditProjectComponent } from './../../components/dialogs/edit-project/edit-project.component';
 import { DeleteProjectComponent } from './../../components/dialogs/delete-project/delete-project.component';
 import { Project, ProjectsService } from './../../shared/projects.service';
 import { Component, OnInit } from '@angular/core';
@@ -24,13 +25,24 @@ export class ProjectListComponent implements OnInit {
     return this.projectsService.projects
   }
 
-  openConfirmDialog(project: Project){
+  openConfirmDeletingDialog(project: Project){
     let dialogRef = this.dialog.open(DeleteProjectComponent, {
       data: project.title
     });
     dialogRef.afterClosed().subscribe(result => {
       if(result){
         this.projectsService.deleteProject(project.id);
+      }
+    })
+  }
+
+  openEditingDialog(project: Project){
+    let dialogRef = this.dialog.open(EditProjectComponent, {
+      data: {...project}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.projectsService.editProject(result)
       }
     })
   }
