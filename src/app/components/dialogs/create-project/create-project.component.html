@@ -1,1 +1,49 @@
-<p>create-project works!</p>
+<h1 mat-dialog-title>Project creating</h1>
+<mat-stepper [linear]="false" #stepper>
+  <mat-step [stepControl]="creatingForm" >
+    <form [formGroup]="creatingForm">
+      <ng-template matStepLabel>Fill out project data</ng-template>
+      <div class="container">
+        <mat-form-field class="form__input" appearance="fill">
+          <mat-label>Title</mat-label>
+          <input
+            matInput
+            placeholder="Project title"
+            formControlName="title" >
+          <mat-error *ngIf="creatingForm.get('title')?.hasError('required') || creatingForm.get('title')?.hasError('whitespace')">
+            Title is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="form__input"appearance="fill">
+          <mat-label>Description</mat-label>
+          <textarea matInput
+            (change)="changeDescription($event)"
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="1"
+            cdkAutosizeMaxRows="5">{{description}}</textarea>
+        </mat-form-field>
+    </div>
+      <div>
+        <button
+          [disabled]="creatingForm.invalid"
+          mat-button
+          matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="creatingForm" label="Select members">
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-stepper>

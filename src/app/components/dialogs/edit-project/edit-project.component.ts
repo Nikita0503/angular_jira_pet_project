@@ -13,7 +13,7 @@ import CustomFormValidators from 'src/app/validators/index'
 })
 export class EditProjectComponent {
 
-  editForm: FormGroup;
+  editingForm: FormGroup;
 
   constructor(
     public dialogRef: MatDialogRef<EditProjectComponent>,
@@ -21,12 +21,12 @@ export class EditProjectComponent {
     private fb: FormBuilder,
     private commonService: CommonService,
     private projectService: ProjectsService) {
-      this.editForm = this.fb.group({
+      this.editingForm = this.fb.group({
         title: ['', [Validators.required, CustomFormValidators.noWhitespaceValidator]],
       });
     }
 
-    changeDescription(event: any){ //TODO: research Type for event input
+    changeDescription(event: any){
       this.data.description = event.target.value
     }
 

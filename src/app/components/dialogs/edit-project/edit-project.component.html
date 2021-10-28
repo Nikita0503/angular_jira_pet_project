@@ -1,18 +1,18 @@
 <h1 mat-dialog-title>Project editing</h1>
-<form [formGroup]="editForm" novalidate>
+<form [formGroup]="editingForm" novalidate>
   <div mat-dialog-content class="container">
-    <mat-form-field appearance="fill">
-      <mat-label>What's your name?</mat-label>
+    <mat-form-field class="form__input" appearance="fill">
+      <mat-label>Title</mat-label>
       <input
         formControlName="title"
         matInput
         [(ngModel)]="data.title">
-      <mat-error *ngIf="editForm.get('title')?.hasError('required') || editForm.get('title')?.hasError('whitespace')">
+      <mat-error *ngIf="editingForm.get('title')?.hasError('required') || editingForm.get('title')?.hasError('whitespace')">
         Title is <strong>required</strong>
       </mat-error>
     </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>What's your name?</mat-label>
+    <mat-form-field class="form__input" appearance="fill">
+      <mat-label>Description</mat-label>
       <textarea matInput
         (change)="changeDescription($event)"
         cdkTextareaAutosize
@@ -24,7 +24,7 @@
   <div mat-dialog-actions>
     <button mat-button (click)="onDeclineClick()">Decline</button>
     <button
-      [disabled]="editForm.invalid"
+      [disabled]="editingForm.invalid"
       mat-button
       (click)="onSubmitClick()"
       cdkFocusInitial>Ok</button>
