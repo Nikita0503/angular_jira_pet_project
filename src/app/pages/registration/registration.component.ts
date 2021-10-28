@@ -30,10 +30,6 @@ export class RegistrationComponent {
       }, {validators: samePasswordsValidator});
     }
 
-    get isDisabledRegistration() {
-      return this.registrationForm.invalid
-    }
-
     get isInvalidPasswords() {
       let isInvalid: boolean = false
       if(!this.registrationForm.get('password')?.invalid

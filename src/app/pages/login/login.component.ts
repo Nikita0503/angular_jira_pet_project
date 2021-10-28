@@ -23,10 +23,6 @@ export class LoginComponent {
       });
     }
 
-    get isDisabledLogin() {
-      return this.loginForm.invalid
-    }
-
     login(){
       const creadentials: UserCredentials = {
         email: this.loginForm.get('email')?.value,

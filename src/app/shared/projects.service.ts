@@ -1,3 +1,4 @@
+import { CommonService } from './common.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -25,7 +26,8 @@ export class ProjectsService {
 
   projects: Project[];
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient,
+    private commonService: CommonService) {
     this.projects = [];
   }
 
@@ -50,7 +52,7 @@ export class ProjectsService {
       })
   }
 
-  editProject(editedProject: Project){ //TODO: refactor title and description names in HTML, make description TextArea
+  editProject(editedProject: Project){
     console.log(editedProject)
     this.httpClient.put<any>(environment.apiUrl + `projects/${editedProject.id}`, editedProject)
       .subscribe({
@@ -61,6 +63,9 @@ export class ProjectsService {
             }
             return project;
           })
+        },
+        error: (e) => {
+          this.commonService.showSnakeMessage(e.error.message)
         }
       })
   }

@@ -81,7 +81,7 @@
 
             <button
                 mat-raised-button color="primary"
-                [disabled]="isDisabledRegistration"
+                [disabled]="registrationForm.invalid"
                 (click)="registration()">Sing up</button>
         </div>
     </form>

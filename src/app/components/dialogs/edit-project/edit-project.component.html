@@ -1,15 +1,31 @@
 <h1 mat-dialog-title>Project editing</h1>
-<div mat-dialog-content>
-  <mat-form-field appearance="fill">
-    <mat-label>What's your name?</mat-label>
-    <input matInput [(ngModel)]="data.title">
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>What's your name?</mat-label>
-    <input matInput [(ngModel)]="data.description">
-  </mat-form-field>
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onDeclineClick()">Decline</button>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
-</div>
+<form [formGroup]="editForm" novalidate>
+  <div mat-dialog-content class="container">
+    <mat-form-field appearance="fill">
+      <mat-label>What's your name?</mat-label>
+      <input
+        formControlName="title"
+        matInput
+        [(ngModel)]="data.title">
+      <mat-error *ngIf="editForm.get('title')?.hasError('required') || editForm.get('title')?.hasError('whitespace')">
+        Title is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>What's your name?</mat-label>
+      <textarea matInput
+        (change)="changeDescription($event)"
+        cdkTextareaAutosize
+        #autosize="cdkTextareaAutosize"
+        cdkAutosizeMinRows="1"
+        cdkAutosizeMaxRows="5">{{data.description}}</textarea>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onDeclineClick()">Decline</button>
+    <button
+      [disabled]="editForm.invalid"
+      mat-button
+      [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+  </div>
+</form>
