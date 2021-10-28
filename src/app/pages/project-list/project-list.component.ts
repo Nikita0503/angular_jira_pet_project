@@ -40,10 +40,6 @@ export class ProjectListComponent implements OnInit {
     let dialogRef = this.dialog.open(EditProjectComponent, {
       data: {...project}
     });
-    dialogRef.afterClosed().subscribe(result => {
-      if(result){
-        this.projectsService.editProject(result)
-      }
-    })
+    dialogRef.afterClosed().subscribe()
   }
 }

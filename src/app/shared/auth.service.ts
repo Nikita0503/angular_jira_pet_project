@@ -44,7 +44,6 @@ export class AuthService {
       },
       error: (e) => {
         console.log("ERROR", e)
-
       }
     })
   }

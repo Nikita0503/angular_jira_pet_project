@@ -25,6 +25,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DeleteProjectComponent } from './components/dialogs/delete-project/delete-project.component';
 import { EditProjectComponent } from './components/dialogs/edit-project/edit-project.component';
+import { CreateProjectComponent } from './components/dialogs/create-project/create-project.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { EditProjectComponent } from './components/dialogs/edit-project/edit-pro
     ProjectListComponent,
     DeleteProjectComponent,
     EditProjectComponent,
+    CreateProjectComponent,
   ],
   imports: [
     BrowserModule,

@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ValidatorFn, Validators, AbstractControl, Valid
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorStateMatcher } from '@angular/material/core';
+import CustomFormValidators from 'src/app/validators/index'
 
 @Component({
   selector: 'app-registration',
@@ -19,10 +20,9 @@ export class RegistrationComponent {
   registrationForm: FormGroup;
 
   constructor(private fb: FormBuilder,
-      private authService: AuthService,
-      private snackBar: MatSnackBar) {
+      private authService: AuthService) {
         this.registrationForm = this.fb.group({
-          name: ['', [Validators.required]],
+          name: ['', [Validators.required, CustomFormValidators.noWhitespaceValidator]],
           email: ['', [Validators.required, Validators.email]],
           password: ['', [Validators.required, Validators.minLength(6)]],
           repeatPassword: ['', [Validators.required, Validators.minLength(6)]],

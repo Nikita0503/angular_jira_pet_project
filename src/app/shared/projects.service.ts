@@ -1,4 +1,3 @@
-import { CommonService } from './common.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -26,8 +25,7 @@ export class ProjectsService {
 
   projects: Project[];
 
-  constructor(private httpClient: HttpClient,
-    private commonService: CommonService) {
+  constructor(private httpClient: HttpClient) {
     this.projects = [];
   }
 
@@ -52,7 +50,7 @@ export class ProjectsService {
       })
   }
 
-  editProject(editedProject: Project){
+  editProject(editedProject: Project, onSuccess: Function, onFailure: Function){
     console.log(editedProject)
     this.httpClient.put<any>(environment.apiUrl + `projects/${editedProject.id}`, editedProject)
       .subscribe({
@@ -62,10 +60,11 @@ export class ProjectsService {
               return response.project
             }
             return project;
-          })
+          });
+          onSuccess(`Project '${editedProject.title} has been updated!'`)
         },
         error: (e) => {
-          this.commonService.showSnakeMessage(e.error.message)
+          onFailure(e.error.message)
         }
       })
   }

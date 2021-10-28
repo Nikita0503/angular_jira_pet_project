@@ -26,6 +26,7 @@
     <button
       [disabled]="editForm.invalid"
       mat-button
-      [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+      (click)="onSubmitClick()"
+      cdkFocusInitial>Ok</button>
   </div>
 </form>
