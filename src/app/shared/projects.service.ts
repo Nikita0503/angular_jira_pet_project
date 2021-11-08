@@ -51,7 +51,6 @@ export class ProjectsService {
   }
 
   editProject(editedProject: Project, onSuccess: Function, onFailure: Function){
-    console.log(editedProject)
     this.httpClient.put<any>(environment.apiUrl + `projects/${editedProject.id}`, editedProject)
       .subscribe({
         next: (response: any) => {
@@ -68,4 +67,5 @@ export class ProjectsService {
         }
       })
   }
+
 }

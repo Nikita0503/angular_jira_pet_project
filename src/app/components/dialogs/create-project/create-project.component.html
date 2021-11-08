@@ -1,5 +1,5 @@
 <h1 mat-dialog-title>Project creating</h1>
-<mat-stepper [linear]="false" #stepper>
+<mat-stepper class="stepper" [linear]="true" #stepper>
   <mat-step [stepControl]="creatingForm" >
     <form [formGroup]="creatingForm">
       <ng-template matStepLabel>Fill out project data</ng-template>
@@ -13,6 +13,9 @@
           <mat-error *ngIf="creatingForm.get('title')?.hasError('required') || creatingForm.get('title')?.hasError('whitespace')">
             Title is <strong>required</strong>
           </mat-error>
+          <mat-error *ngIf="creatingForm.get('title')?.hasError('projectExists')">
+            Project already exists
+          </mat-error>
         </mat-form-field>
         <mat-form-field class="form__input"appearance="fill">
           <mat-label>Description</mat-label>
@@ -23,13 +26,14 @@
             cdkAutosizeMinRows="1"
             cdkAutosizeMaxRows="5">{{description}}</textarea>
         </mat-form-field>
+        <div>
+          <button
+            (click)="createNewProject()"
+            [disabled]="creatingForm.invalid"
+            mat-button
+            matStepperNext>Next</button>
+        </div>
     </div>
-      <div>
-        <button
-          [disabled]="creatingForm.invalid"
-          mat-button
-          matStepperNext>Next</button>
-      </div>
     </form>
   </mat-step>
   <mat-step [stepControl]="creatingForm" label="Select members">
@@ -37,6 +41,14 @@
       <button mat-button matStepperPrevious>Back</button>
       <button mat-button matStepperNext>Next</button>
     </div>
+    <div>
+      <mat-selection-list #allusers>
+        <mat-list-option *ngFor="let user of this.allUsers" (click)="changeUsersInProject(user)">
+          {{user.name}}
+        </mat-list-option>
+      </mat-selection-list>
+    </div>
+
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>

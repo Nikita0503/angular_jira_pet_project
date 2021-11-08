@@ -2,9 +2,18 @@
   display: flex;
   flex-direction: column;
   margin-top: 15px;
+  justify-content: center;
 }
 
 .form__input{
   width: 100%;
   margin-bottom: 5px;
+}
+
+.form__button_next{
+  margin-top: 30px;
+}
+
+.stepper{
+  height: 350px;
 }

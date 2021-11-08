@@ -27,6 +27,8 @@ import { DeleteProjectComponent } from './components/dialogs/delete-project/dele
 import { EditProjectComponent } from './components/dialogs/edit-project/edit-project.component';
 import { CreateProjectComponent } from './components/dialogs/create-project/create-project.component';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -58,7 +60,9 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatMenuModule,
     MatIconModule,
     MatDialogModule,
-    MatStepperModule
+    MatStepperModule,
+    MatTabsModule,
+    MatListModule
   ],
   providers: [
     {
