@@ -45,7 +45,7 @@ export class ProjectListComponent implements OnInit {
     dialogRef.afterClosed().subscribe();
   }
 
-  openCreatingDialog(){
+  openCreatingDialog(){//TODO: wait until request will be ended, only after that, open next step
     let dialogRef = this.dialog.open(CreateProjectComponent);
     dialogRef.afterClosed().subscribe();
   }

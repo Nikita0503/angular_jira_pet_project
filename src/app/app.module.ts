@@ -31,6 +31,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatListModule } from '@angular/material/list';
 import { ProjectsFilterPipe } from './shared/pipes/projects-filter.pipe';
 import { ProjectMembersComponent } from './components/dialogs/project-members/project-members.component';
+import { UsersNotInProjectPipe } from './shared/pipes/users-not-in-project.pipe';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { ProjectMembersComponent } from './components/dialogs/project-members/pr
     CreateProjectComponent,
     ProjectsFilterPipe,
     ProjectMembersComponent,
+    UsersNotInProjectPipe,
   ],
   imports: [
     BrowserModule,

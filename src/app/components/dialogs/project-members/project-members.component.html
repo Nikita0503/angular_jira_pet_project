@@ -2,10 +2,24 @@
   <h1 mat-dialog-title>Project members</h1>
   <mat-tab-group mat-align-tabs="start">
     <mat-tab label="In the project">
-      <p>In the project</p>
+      <mat-list>
+        <mat-list-item *ngFor="let user of this.projectMembers">
+          <div class="item">
+            <p>{{user.name}}</p>
+            <mat-icon class="icon icon_remove" aria-hidden="false" aria-label="Example home icon">delete_outline</mat-icon>
+          </div>
+        </mat-list-item>
+      </mat-list>
     </mat-tab>
     <mat-tab label="Not in project">
-      <p>Not in project</p>
+      <mat-list>
+        <mat-list-item *ngFor="let user of this.allUsers | usersNotInProject: this.projectMembers">
+          <div class="item">
+            <p>{{user.name}}</p>
+            <mat-icon class="icon icon_add" aria-hidden="false" aria-label="Example home icon">person_add</mat-icon>
+          </div>
+        </mat-list-item>
+      </mat-list>
     </mat-tab>
   </mat-tab-group>
 </div>
