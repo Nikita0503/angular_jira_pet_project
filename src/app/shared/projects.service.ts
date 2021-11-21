@@ -35,7 +35,6 @@ export class ProjectsService {
       .subscribe({
         next: (response: any) => {
           this.projects = response.projects;
-          console.log(response)
         }
       })
   }

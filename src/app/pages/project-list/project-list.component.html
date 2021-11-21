@@ -28,7 +28,7 @@
           </div>
           <div class="project_description">
             <button mat-button class="description_item">
-              <div class="description_item__border">
+              <div (click)="openProjectMembers(project)" class="description_item__border">
                 <span class="description_item__count">{{project.users.length}}</span>
               </div>
               <span class="description_item__title">Members</span>

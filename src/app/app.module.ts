@@ -30,6 +30,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatListModule } from '@angular/material/list';
 import { ProjectsFilterPipe } from './shared/pipes/projects-filter.pipe';
+import { ProjectMembersComponent } from './components/dialogs/project-members/project-members.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { ProjectsFilterPipe } from './shared/pipes/projects-filter.pipe';
     EditProjectComponent,
     CreateProjectComponent,
     ProjectsFilterPipe,
+    ProjectMembersComponent,
   ],
   imports: [
     BrowserModule,

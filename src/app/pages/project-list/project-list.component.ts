@@ -1,3 +1,4 @@
+import { ProjectMembersComponent } from './../../components/dialogs/project-members/project-members.component';
 import { CreateProjectComponent } from './../../components/dialogs/create-project/create-project.component';
 import { EditProjectComponent } from './../../components/dialogs/edit-project/edit-project.component';
 import { DeleteProjectComponent } from './../../components/dialogs/delete-project/delete-project.component';
@@ -46,6 +47,13 @@ export class ProjectListComponent implements OnInit {
 
   openCreatingDialog(){
     let dialogRef = this.dialog.open(CreateProjectComponent);
+    dialogRef.afterClosed().subscribe();
+  }
+
+  openProjectMembers(project: Project){
+    let dialogRef = this.dialog.open(ProjectMembersComponent, {
+      data: {...project}
+    });
     dialogRef.afterClosed().subscribe();
   }
 }
