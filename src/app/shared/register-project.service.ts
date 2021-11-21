@@ -1,9 +1,9 @@
 import { User } from './user.service';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Project } from './projects.service';
+import { Project, ProjectsService } from './projects.service';
 import { map, switchMap } from 'rxjs/operators';
 import { MatSelectionListChange } from '@angular/material/list';
 
@@ -15,7 +15,7 @@ export class RegisterProjectService {
   newProject?: Project;
   allUsers: User[];
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private projectService: ProjectsService) {
     this.allUsers = [];
   }
 
@@ -33,6 +33,19 @@ export class RegisterProjectService {
         this.newProject = response.project;
         return this.fetchUsers()
       })).subscribe()
+  }
+
+  addUsersToProject(users: User[]){
+    const requests: Observable<any>[] = [];
+    for(var i = 0; i < users.length; i++){
+       requests.push(this.httpClient.post<any>(environment.apiUrl + `projects/${this.newProject?.id}/users`, {
+          userId: users[i].id
+        }))
+    }
+    forkJoin(requests)
+      .subscribe((result: any) => {
+        this.projectService.fetchAllProjects();
+      })
   }
 
   fetchUsers(): Observable<any>{

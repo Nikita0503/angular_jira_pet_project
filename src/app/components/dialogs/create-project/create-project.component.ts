@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, FormControl, NgForm, FormGroupDirective, ValidatorFn, AbstractControl, ValidationErrors, AsyncValidatorFn } from '@angular/forms';
 import { map } from 'rxjs/operators';
 import { MatListOption } from '@angular/material/list';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-create-project',
@@ -19,7 +20,7 @@ export class CreateProjectComponent {
   creatingForm: FormGroup;
   selectedUsers: User[];
 
-  constructor(private fb: FormBuilder, private registerProjectService: RegisterProjectService) {
+  constructor(private fb: FormBuilder, private registerProjectService: RegisterProjectService, public dialogRef: MatDialogRef<CreateProjectComponent>) {
     this.creatingForm = this.fb.group({
       title: ['', [Validators.required, CustomFormValidators.noWhitespaceValidator], [projectTitleValidator(registerProjectService)]],
       description: ''
@@ -46,16 +47,21 @@ export class CreateProjectComponent {
     this.registerProjectService.createNewProject(title, description);
   }
 
+  addUsersToProject(){
+    this.registerProjectService.addUsersToProject(this.selectedUsers);
+  }
+
   changeUsersInProject(selectedUser: User){
     const index = this.selectedUsers.findIndex((user: User) => selectedUser.id == user.id);
     if(index > -1){
-      console.log(1)
       this.selectedUsers.splice(index, 1)
     }else{
-      console.log(0)
       this.selectedUsers.push(selectedUser)
     }
-    console.log(this.selectedUsers)
+  }
+
+  closeDialog(): void {
+    this.dialogRef.close(false);
   }
 }
 
