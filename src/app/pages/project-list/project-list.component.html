@@ -7,7 +7,7 @@
         mat-raised-button color="primary">Create new project</button>
     <div>
       <mat-accordion>
-        <mat-expansion-panel *ngFor="let project of projects">
+        <mat-expansion-panel *ngFor="let project of projects | projectsFilter">
           <mat-expansion-panel-header>
             <mat-panel-title>
               {{project.title}}

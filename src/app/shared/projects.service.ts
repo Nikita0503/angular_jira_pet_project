@@ -16,6 +16,7 @@ export interface Project {
   description: string,
   tasksCount: number,
   users: User[],
+  updatedAt: string
 }
 
 @Injectable({

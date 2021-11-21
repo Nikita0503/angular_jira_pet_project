@@ -29,6 +29,7 @@ import { CreateProjectComponent } from './components/dialogs/create-project/crea
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatListModule } from '@angular/material/list';
+import { ProjectsFilterPipe } from './shared/pipes/projects-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { MatListModule } from '@angular/material/list';
     DeleteProjectComponent,
     EditProjectComponent,
     CreateProjectComponent,
+    ProjectsFilterPipe,
   ],
   imports: [
     BrowserModule,
