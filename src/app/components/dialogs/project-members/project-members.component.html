@@ -6,7 +6,9 @@
         <mat-list-item *ngFor="let user of this.projectMembers">
           <div class="item">
             <p>{{user.name}}</p>
-            <mat-icon class="icon icon_remove" aria-hidden="false" aria-label="Example home icon">delete_outline</mat-icon>
+            <div (click)="removeUserFromProject(user)">
+              <mat-icon class="icon icon_remove" aria-hidden="false" aria-label="Example home icon">delete_outline</mat-icon>
+            </div>
           </div>
         </mat-list-item>
       </mat-list>
@@ -16,7 +18,9 @@
         <mat-list-item *ngFor="let user of this.allUsers | usersNotInProject: this.projectMembers">
           <div class="item">
             <p>{{user.name}}</p>
-            <mat-icon class="icon icon_add" aria-hidden="false" aria-label="Example home icon">person_add</mat-icon>
+            <div (click)="addUserToProject(user)">
+              <mat-icon class="icon icon_add" aria-hidden="false" aria-label="Example home icon">person_add</mat-icon>
+            </div>
           </div>
         </mat-list-item>
       </mat-list>

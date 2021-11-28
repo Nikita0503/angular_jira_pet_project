@@ -30,4 +30,12 @@ export class ProjectMembersComponent implements OnInit {
   get projectMembers(): User[]{
     return this.projectsMembersService.projectMembers;
   }
+
+  addUserToProject(user: User){
+    this.projectsMembersService.addUserToProject(this.selectedProject.id, user)
+  }
+
+  removeUserFromProject(user: User){
+    this.projectsMembersService.removeUserFromProject(this.selectedProject.id, user)
+  }
 }

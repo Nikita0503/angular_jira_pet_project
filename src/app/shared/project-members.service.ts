@@ -1,3 +1,4 @@
+import { ProjectsService } from './projects.service';
 import { HttpClient } from '@angular/common/http';
 import { User } from './user.service';
 import { Injectable } from '@angular/core';
@@ -11,7 +12,7 @@ export class ProjectMembersService {
   allUsers: User[];
   projectMembers: User[];
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private projectsService: ProjectsService) {
     this.allUsers = [];
     this.projectMembers = [];
   }
@@ -26,7 +27,7 @@ export class ProjectMembersService {
   }
 
   fetchProjectMembers(projectId: number){
-    this.httpClient.get<any>(environment.apiUrl + `/projects/${projectId}/users`)
+    this.httpClient.get<any>(environment.apiUrl + `projects/${projectId}/users`)
       .subscribe({
         next: (response: any) => {
           this.projectMembers = response.users;
@@ -35,21 +36,28 @@ export class ProjectMembersService {
   }
 
   addUserToProject(projectId: number, selectedUser: User){
-    this.httpClient.post<any>(environment.apiUrl + `/projects/${projectId}/users`, {
+    this.httpClient.post<any>(environment.apiUrl + `projects/${projectId}/users`, {
       userId: selectedUser.id
     })
       .subscribe({
         next: (response: any) => {
           this.fetchProjectMembers(projectId);
+          this.projectsService.fetchAllProjects();
         }
       })
   }
 
   removeUserFromProject(projectId: number, selectedUser: User){
-    this.httpClient.delete<any>(environment.apiUrl = `projects/${projectId}/users`, {
+    this.httpClient.delete<any>(environment.apiUrl + `projects/${projectId}/users`, {
       body: {
         userId: selectedUser.id
       }
     })
+      .subscribe({
+        next: (response: any) => {
+          this.fetchProjectMembers(projectId);
+          this.projectsService.fetchAllProjects();
+        }
+      })
   }
 }
