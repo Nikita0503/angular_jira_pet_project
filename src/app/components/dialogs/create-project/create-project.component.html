@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>Project creating</h1>
-<mat-stepper class="stepper" [linear]="false" #stepper>
-  <mat-step [stepControl]="creatingForm" >
+<mat-stepper class="stepper" [linear]="true" #stepper>
+  <mat-step editable="false" [stepControl]="creatingForm" >
     <form [formGroup]="creatingForm">
       <ng-template matStepLabel>Fill out project data</ng-template>
       <div class="container">
@@ -28,20 +28,19 @@
         </mat-form-field>
         <div>
           <button
-            (click)="createNewProject()"
+            (click)="createNewProject(stepper)"
             [disabled]="creatingForm.invalid"
-            mat-button
-            matStepperNext>Next</button>
+            mat-button>Next</button>
         </div>
     </div>
     </form>
   </mat-step>
-  <mat-step [stepControl]="creatingForm" label="Select members">
+  <mat-step editable="false" [stepControl]="creatingForm" label="Select members">
     <div>
-      <button mat-button matStepperPrevious>Back</button>
       <button
-        (click)="addUsersToProject()"
-        mat-button matStepperNext>Next</button>
+        (click)="addUsersToProject(stepper)"
+        mat-button>Next</button>
+      <button (click)="skipStep(stepper)" mat-button>Skip</button>
     </div>
     <div>
       <mat-selection-list #allusers>
@@ -50,7 +49,6 @@
         </mat-list-option>
       </mat-selection-list>
     </div>
-
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>

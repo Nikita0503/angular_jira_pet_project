@@ -19,6 +19,6 @@
       </div>
     </ng-template>
 </div>
-<div *ngIf="isLoading" class="progress_bar">
-  <mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
+<div class="progress_bar">
+  <mat-progress-bar *ngIf="isLoading" mode="indeterminate" color="accent"></mat-progress-bar>
 </div>

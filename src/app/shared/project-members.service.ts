@@ -33,4 +33,23 @@ export class ProjectMembersService {
         }
       })
   }
+
+  addUserToProject(projectId: number, selectedUser: User){
+    this.httpClient.post<any>(environment.apiUrl + `/projects/${projectId}/users`, {
+      userId: selectedUser.id
+    })
+      .subscribe({
+        next: (response: any) => {
+          this.fetchProjectMembers(projectId);
+        }
+      })
+  }
+
+  removeUserFromProject(projectId: number, selectedUser: User){
+    this.httpClient.delete<any>(environment.apiUrl = `projects/${projectId}/users`, {
+      body: {
+        userId: selectedUser.id
+      }
+    })
+  }
 }

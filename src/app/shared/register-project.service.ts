@@ -1,3 +1,4 @@
+import { CommonService } from './common.service';
 import { User } from './user.service';
 import { HttpClient } from '@angular/common/http';
 import { forkJoin, Observable } from 'rxjs';
@@ -15,7 +16,9 @@ export class RegisterProjectService {
   newProject?: Project;
   allUsers: User[];
 
-  constructor(private httpClient: HttpClient, private projectService: ProjectsService) {
+  constructor(private httpClient: HttpClient,
+    private projectService: ProjectsService,
+    private commonService: CommonService) {
     this.allUsers = [];
   }
 
@@ -25,17 +28,25 @@ export class RegisterProjectService {
     })
   }
 
-  createNewProject(title: string, description: string){
+  createNewProject(title: string, description: string, callback?: Function){
     this.httpClient.post<any>(environment.apiUrl + 'projects', {
       title,
       description
     }).pipe(switchMap(response => {
         this.newProject = response.project;
+        if(!!callback){
+          callback();
+        }
+        this.updateProjects();
         return this.fetchUsers()
       })).subscribe()
   }
 
-  addUsersToProject(users: User[]){
+  addUsersToProject(users: User[], callback?: Function){
+    if(users.length == 0){
+      this.commonService.showSnakeMessage("You must select at least 1 member")
+      return
+    }
     const requests: Observable<any>[] = [];
     for(var i = 0; i < users.length; i++){
        requests.push(this.httpClient.post<any>(environment.apiUrl + `projects/${this.newProject?.id}/users`, {
@@ -44,8 +55,15 @@ export class RegisterProjectService {
     }
     forkJoin(requests)
       .subscribe((result: any) => {
-        this.projectService.fetchAllProjects();
+        this.updateProjects();
+        if(!!callback){
+          callback();
+        }
       })
+  }
+
+  updateProjects(){
+    this.projectService.fetchAllProjects();
   }
 
   fetchUsers(): Observable<any>{

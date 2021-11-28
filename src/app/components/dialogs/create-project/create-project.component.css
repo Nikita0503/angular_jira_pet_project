@@ -31,7 +31,10 @@
   margin-bottom: 10px;
 }
 
-
 .congratulations__description{
   margin-bottom: 30px;
+}
+
+::ng-deep .mat-horizontal-stepper-header{
+  pointer-events: none !important;
 }

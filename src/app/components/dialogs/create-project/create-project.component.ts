@@ -9,6 +9,7 @@ import { FormGroup, Validators, FormBuilder, FormControl, NgForm, FormGroupDirec
 import { map } from 'rxjs/operators';
 import { MatListOption } from '@angular/material/list';
 import { MatDialogRef } from '@angular/material/dialog';
+import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-create-project',
@@ -41,16 +42,6 @@ export class CreateProjectComponent {
     this.creatingForm.get('description')?.setValue(description);
   }
 
-  createNewProject(){
-    const title = this.creatingForm.get('title')?.value
-    const description = this.creatingForm.get('description')?.value
-    this.registerProjectService.createNewProject(title, description);
-  }
-
-  addUsersToProject(){
-    this.registerProjectService.addUsersToProject(this.selectedUsers);
-  }
-
   changeUsersInProject(selectedUser: User){
     const index = this.selectedUsers.findIndex((user: User) => selectedUser.id == user.id);
     if(index > -1){
@@ -58,6 +49,21 @@ export class CreateProjectComponent {
     }else{
       this.selectedUsers.push(selectedUser)
     }
+  }
+
+  createNewProject(stepper: MatStepper){
+    const title = this.creatingForm.get('title')?.value
+    const description = this.creatingForm.get('description')?.value
+    this.registerProjectService.createNewProject(title, description, () => stepper.next());
+  }
+
+  addUsersToProject(stepper: MatStepper){
+    this.registerProjectService.addUsersToProject(this.selectedUsers, () => stepper.next());
+  }
+
+  skipStep(stepper: MatStepper){
+    stepper.next()
+    this.registerProjectService.updateProjects();
   }
 
   closeDialog(): void {
