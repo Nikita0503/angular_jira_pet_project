@@ -15,11 +15,13 @@ export class RegisterProjectService {
 
   newProject?: Project;
   allUsers: User[];
+  selectedUsers: User[];
 
   constructor(private httpClient: HttpClient,
     private projectService: ProjectsService,
     private commonService: CommonService) {
     this.allUsers = [];
+    this.selectedUsers = [];
   }
 
   checkExistsProject(title: string): Observable<boolean>{
@@ -42,15 +44,24 @@ export class RegisterProjectService {
       })).subscribe()
   }
 
-  addUsersToProject(users: User[], callback?: Function){
-    if(users.length == 0){
+  changeUserStatus(selectedUser: User){
+    const index = this.selectedUsers.findIndex((user: User) => selectedUser.id == user.id);
+    if(index > -1){
+      this.selectedUsers.splice(index, 1)
+    }else{
+      this.selectedUsers.push(selectedUser)
+    }
+  }
+
+  addUsersToProject(callback?: Function){
+    if(this.selectedUsers.length == 0){
       this.commonService.showSnakeMessage("You must select at least 1 member")
       return
     }
     const requests: Observable<any>[] = [];
-    for(var i = 0; i < users.length; i++){
+    for(var i = 0; i < this.selectedUsers.length; i++){
        requests.push(this.httpClient.post<any>(environment.apiUrl + `projects/${this.newProject?.id}/users`, {
-          userId: users[i].id
+          userId: this.selectedUsers[i].id
         }))
     }
     forkJoin(requests)

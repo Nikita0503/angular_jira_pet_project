@@ -37,14 +37,14 @@
   </mat-step>
   <mat-step editable="false" [stepControl]="creatingForm" label="Select members">
     <div>
-      <button
-        (click)="addUsersToProject(stepper)"
-        mat-button>Next</button>
       <button (click)="skipStep(stepper)" mat-button>Skip</button>
+      <button
+        (click)="addUsersToCreatedProject(stepper)"
+        mat-button>Next</button>
     </div>
     <div>
       <mat-selection-list #allusers>
-        <mat-list-option *ngFor="let user of this.allUsers" (click)="changeUsersInProject(user)">
+        <mat-list-option *ngFor="let user of this.allUsers" (click)="changeUserStatus(user)">
           {{user.name}}
         </mat-list-option>
       </mat-selection-list>

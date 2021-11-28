@@ -1,13 +1,10 @@
 import { User } from './../../../shared/user.service';
 import { RegisterProjectService } from './../../../shared/register-project.service';
 import { Observable } from 'rxjs';
-import { ErrorStateMatcher } from '@angular/material/core';
-import { ProjectsService } from './../../../shared/projects.service';
 import CustomFormValidators from 'src/app/validators/index';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormBuilder, FormControl, NgForm, FormGroupDirective, ValidatorFn, AbstractControl, ValidationErrors, AsyncValidatorFn } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, AbstractControl, ValidationErrors, AsyncValidatorFn } from '@angular/forms';
 import { map } from 'rxjs/operators';
-import { MatListOption } from '@angular/material/list';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
 
@@ -19,14 +16,12 @@ import { MatStepper } from '@angular/material/stepper';
 export class CreateProjectComponent {
 
   creatingForm: FormGroup;
-  selectedUsers: User[];
 
   constructor(private fb: FormBuilder, private registerProjectService: RegisterProjectService, public dialogRef: MatDialogRef<CreateProjectComponent>) {
     this.creatingForm = this.fb.group({
       title: ['', [Validators.required, CustomFormValidators.noWhitespaceValidator], [projectTitleValidator(registerProjectService)]],
       description: ''
     });
-    this.selectedUsers = [];
   }
 
   get description(){
@@ -42,13 +37,13 @@ export class CreateProjectComponent {
     this.creatingForm.get('description')?.setValue(description);
   }
 
-  changeUsersInProject(selectedUser: User){
-    const index = this.selectedUsers.findIndex((user: User) => selectedUser.id == user.id);
-    if(index > -1){
-      this.selectedUsers.splice(index, 1)
-    }else{
-      this.selectedUsers.push(selectedUser)
-    }
+  changeUserStatus(selectedUser: User){
+    this.registerProjectService.changeUserStatus(selectedUser);
+  }
+
+  skipStep(stepper: MatStepper){
+    stepper.next()
+    this.registerProjectService.updateProjects();
   }
 
   createNewProject(stepper: MatStepper){
@@ -57,13 +52,8 @@ export class CreateProjectComponent {
     this.registerProjectService.createNewProject(title, description, () => stepper.next());
   }
 
-  addUsersToProject(stepper: MatStepper){
-    this.registerProjectService.addUsersToProject(this.selectedUsers, () => stepper.next());
-  }
-
-  skipStep(stepper: MatStepper){
-    stepper.next()
-    this.registerProjectService.updateProjects();
+  addUsersToCreatedProject(stepper: MatStepper){
+    this.registerProjectService.addUsersToProject(() => stepper.next());
   }
 
   closeDialog(): void {
