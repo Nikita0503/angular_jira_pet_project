@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ProjectMembersComponent } from './../../components/dialogs/project-members/project-members.component';
 import { CreateProjectComponent } from './../../components/dialogs/create-project/create-project.component';
 import { EditProjectComponent } from './../../components/dialogs/edit-project/edit-project.component';
@@ -16,6 +17,7 @@ export class ProjectListComponent implements OnInit {
 
   constructor(private userService: UserService,
     private projectsService: ProjectsService,
+    private router: Router,
     public dialog: MatDialog) { }
 
   ngOnInit() {
@@ -55,5 +57,13 @@ export class ProjectListComponent implements OnInit {
       data: {...project}
     });
     dialogRef.afterClosed().subscribe();
+  }
+
+  openTaskListPage(project: Project){
+    this.router.navigate(['/tasks'], {
+      queryParams: {
+        projectId: project.id
+      }
+    });
   }
 }

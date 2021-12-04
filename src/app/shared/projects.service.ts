@@ -42,7 +42,7 @@ export class ProjectsService {
   deleteProject(id: number){
     this.httpClient.delete<any>(environment.apiUrl + `projects/${id}/`)
       .subscribe({
-        next: (response: any) => { //TODO: refactor for finding by index, not filter!
+        next: (response: any) => {
           if(response.deleted){
             this.projects = this.projects.filter((project: Project) => project.id != id);
           }

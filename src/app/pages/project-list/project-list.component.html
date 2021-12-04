@@ -33,7 +33,7 @@
               </div>
               <span class="description_item__title">Members</span>
             </button>
-            <button mat-button class="description_item">
+            <button (click)="openTaskListPage(project)" mat-button class="description_item">
               <div class="description_item__border">
                 <span class="description_item__count">{{project.tasksCount}}</span>
               </div>

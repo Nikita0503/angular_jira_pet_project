@@ -32,6 +32,8 @@ import { MatListModule } from '@angular/material/list';
 import { ProjectsFilterPipe } from './shared/pipes/projects-filter.pipe';
 import { ProjectMembersComponent } from './components/dialogs/project-members/project-members.component';
 import { UsersNotInProjectPipe } from './shared/pipes/users-not-in-project.pipe';
+import { TaskListComponent } from './pages/task-list/task-list.component';
+import { CreateTaskComponent } from './pages/create-task/create-task.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,8 @@ import { UsersNotInProjectPipe } from './shared/pipes/users-not-in-project.pipe'
     ProjectsFilterPipe,
     ProjectMembersComponent,
     UsersNotInProjectPipe,
+    TaskListComponent,
+    CreateTaskComponent,
   ],
   imports: [
     BrowserModule,
