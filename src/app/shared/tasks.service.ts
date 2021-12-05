@@ -29,7 +29,8 @@ export class TasksService {
 
   tasks: Task[];
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient,
+    ) {
     this.tasks = [{
       id: 1,
       title: 'task',
@@ -53,7 +54,7 @@ export class TasksService {
     }];
   }
 
-  fetchAllProjects(projectId: number){
+  fetchAllTasks(projectId: number){
     this.httpClient.get<any>(environment.apiUrl + `projects/${projectId}/tasks`)
       .subscribe({
         next: (response: any) => {
@@ -62,7 +63,7 @@ export class TasksService {
       })
   }
 
-  deleteProject(projectId: number, taskId: number){
+  deleteTask(projectId: number, taskId: number){
     this.httpClient.delete<any>(environment.apiUrl + `projects/${projectId}/tasks/${taskId}`)
       .subscribe({
         next: (response: any) => {

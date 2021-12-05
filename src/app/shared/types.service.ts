@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 export interface Type {
   id: number,
@@ -11,5 +13,18 @@ export interface Type {
 })
 export class TypesService {
 
-  constructor() { }
+  types: Type[];
+
+  constructor(private httpClient: HttpClient) {
+    this.types = [];
+  }
+
+  fetchTypes(){
+    this.httpClient.get<any>(environment.apiUrl + `types`)
+    .subscribe({
+      next: (response: any) => {
+        this.types = response.types;
+      }
+    })
+  }
 }

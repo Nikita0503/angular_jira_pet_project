@@ -17,7 +17,7 @@ export class TaskListComponent implements OnInit {
     this.route.queryParams
       .subscribe(params => {
         console.log(params);
-        this.tasksService.fetchAllProjects(params.projectId)
+        this.tasksService.fetchAllTasks(params.projectId)
       }
     );
   }

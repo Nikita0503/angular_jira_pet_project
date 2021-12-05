@@ -1,4 +1,13 @@
+import { UsersService } from './../../shared/users.service';
+import { StatusesService } from './../../shared/statuses.service';
+import { TypesService } from './../../shared/types.service';
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+
+export interface Attachment {
+  url:string,
+  file: File,
+}
 
 @Component({
   selector: 'app-create-task',
@@ -7,44 +16,59 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateTaskComponent implements OnInit {
 
-  statuses: any[];
-  types: any[];
-  users: any[];
-  files: any[];
+  creatingForm: FormGroup;
+  attachments: Attachment[];
 
-  constructor() {
-    this.statuses = [{
-      title: 'Backlog'
-    },
-    {
-      title: 'In progress'
-    },
-    {
-      title: 'Done'
-    }];
-    this.types = [
-      {title: 'Task'},
-      {title: 'Subtask'},
-      {title: 'Story'},
-      {title: 'Bag'}
-    ]
-    this.users = [
-      {name: 'User 1'},
-      {name: 'User 2'},
-      {name: 'User 3'},
-      {name: 'User 4'}
-    ]
-    this.files = [1];
+  constructor(private fb: FormBuilder,
+    private typesService: TypesService,
+    private statusesService: StatusesService,
+    private usersService: UsersService) {
+      this.creatingForm = this.fb.group({
+        title: ['', [Validators.required]],
+        description: '',
+        type: ['', [Validators.required]],
+        status: ['', [Validators.required]],
+        user: ['', [Validators.required]],
+        hours: ['', [Validators.min(0)]],
+        minutes: ['', [Validators.min(0), Validators.max(60)]]
+      });
+      typesService.fetchTypes();
+      statusesService.fetchStatuses();
+      usersService.fetchUsers();
+      this.attachments = [];
   }
 
   ngOnInit(): void {
   }
 
+  get statuses(){
+    return this.statusesService.statuses;
+  }
+
+  get types(){
+    return this.typesService.types;
+  }
+
+  get users(){
+    return this.usersService.users;
+  }
+
+  changeDescription(event: any){
+    const description = event.target.value;
+    this.creatingForm.get('description')?.setValue(description);
+  }
+
   onPickFile(event: any){
     var reader = new FileReader();
-    reader.onload = (event: any) => {
-      let file = event.target.result;
-      console.log(file)
+    reader.onload = (file: any) => {
+      this.attachments.push({
+        url: file.target.result,
+        file: event.target.files[0]
+      })
+      console.log({
+        url: file.target.result,
+        file: event.target.files[0]
+      })
     };
     reader.onerror = (event: any) => {
       console.log("File could not be read: " + event.target.error.code);
@@ -52,7 +76,7 @@ export class CreateTaskComponent implements OnInit {
     reader.readAsDataURL(event.target.files[0]);
   }
 
-  deleteFile(file: any){
-
+  deleteFile(attachment: Attachment){
+    this.attachments = this.attachments.filter((item: Attachment) => item.url !== attachment.url)
   }
 }

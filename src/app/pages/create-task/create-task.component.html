@@ -2,21 +2,27 @@
   <div class="task_creation_container">
     <h1>Task creation</h1>
     <div>
-      <form class="example-form">
+      <form [formGroup]="creatingForm" class="example-form">
         <mat-form-field class="example-full-width" appearance="fill">
           <mat-label>Title</mat-label>
-          <input matInput>
+          <input formControlName="title" matInput>
         </mat-form-field>
 
         <mat-form-field class="example-full-width" appearance="fill">
           <mat-label>Description</mat-label>
-          <textarea matInput placeholder="Some task details..."></textarea>
+          <textarea
+            (change)="changeDescription($event)"
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="1"
+            cdkAutosizeMaxRows="5"
+            matInput placeholder="Some task details..."></textarea>
         </mat-form-field>
 
         <div class="task_info">
           <mat-form-field class="form-select" appearance="fill">
             <mat-label>Type</mat-label>
-            <mat-select>
+            <mat-select formControlName="type">
               <mat-option *ngFor="let type of types" [value]="type.title">
                 {{type.title}}
               </mat-option>
@@ -25,7 +31,7 @@
 
           <mat-form-field appearance="fill">
             <mat-label>Status</mat-label>
-            <mat-select>
+            <mat-select formControlName="status">
               <mat-option *ngFor="let status of statuses" [value]="status.title">
                 {{status.title}}
               </mat-option>
@@ -35,7 +41,7 @@
 
         <mat-form-field appearance="fill">
           <mat-label>Assign to execute</mat-label>
-          <mat-select>
+          <mat-select formControlName="user">
             <mat-option *ngFor="let user of users" [value]="user.name">
               {{user.name}}
             </mat-option>
@@ -45,12 +51,12 @@
         <h4>Alloted time</h4>
         <div class="time_container">
           <mat-form-field appearance="fill">
-            <mat-label>Days</mat-label>
-            <input type="number" matInput>
+            <mat-label>Hours</mat-label>
+            <input formControlName="hours" type="number" matInput>
           </mat-form-field>
           <mat-form-field appearance="fill">
-            <mat-label>Hours</mat-label>
-            <input type="number" matInput>
+            <mat-label>Minutes</mat-label>
+            <input formControlName="minutes" type="number" min="0" max="60" matInput>
           </mat-form-field>
         </div>
 
@@ -61,13 +67,19 @@
             <input type="file" class="form__picker" (change)="onPickFile($event)" placeholder="Upload file" accept=".png,.jpeg,.jpg,.gif">
           </label>
 
-          <div *ngFor="let file of files" class="file_list_item"><div class="file_list_item_delete" (click)="deleteFile(file)"><mat-icon aria-hidden="false" aria-label="Example home icon">close</mat-icon></div></div>
+          <div *ngFor="let attachment of attachments" class="file_list_item" (click)="deleteFile(attachment)">
+            <img class="file_list_item__image" [src]="attachment.url">
+            <div class="file_list_item__delete">
+              <span>Delete</span>
+            </div>
+          </div>
         </div>
 
         <div class="actions_container">
           <button
             mat-button color="primary">Cancel</button>
           <button
+            [disabled]="creatingForm.invalid"
             class="create_task_button"
             mat-raised-button color="primary">Save</button>
         </div>

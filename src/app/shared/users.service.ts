@@ -1,29 +1,24 @@
+import { User } from './user.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
-export interface Status {
-  id: number,
-  title: string,
-  color: string
-}
-
 @Injectable({
   providedIn: 'root'
 })
-export class StatusesService {
+export class UsersService {
 
-  statuses: Status[];
+  users: User[];
 
   constructor(private httpClient: HttpClient) {
-    this.statuses = [];
+    this.users = []
   }
 
-  fetchStatuses(){
-    this.httpClient.get<any>(environment.apiUrl + `statuses`)
+  fetchUsers(){
+    this.httpClient.get<any>(environment.apiUrl + `users`)
     .subscribe({
       next: (response: any) => {
-        this.statuses = response.statuses;
+        this.users = response.users;
       }
     })
   }
