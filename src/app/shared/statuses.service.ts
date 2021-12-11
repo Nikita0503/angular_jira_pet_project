@@ -27,4 +27,8 @@ export class StatusesService {
       }
     })
   }
+
+  getStatusByTitle(title: string): Status | undefined{
+    return this.statuses.find((status: Status) => status.title === title)
+  }
 }

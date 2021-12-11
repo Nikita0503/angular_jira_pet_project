@@ -27,4 +27,8 @@ export class TypesService {
       }
     })
   }
+
+  getTypeByTitle(title: string): Type | undefined{
+    return this.types.find((type: Type) => type.title === title)
+  }
 }

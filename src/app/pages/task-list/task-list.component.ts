@@ -9,6 +9,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class TaskListComponent implements OnInit {
 
+  projectId?: number;
+
   constructor(private route: ActivatedRoute,
     private tasksService: TasksService,
     private router: Router) { }
@@ -16,14 +18,18 @@ export class TaskListComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams
       .subscribe(params => {
-        console.log(params);
+        this.projectId = params.projectId
         this.tasksService.fetchAllTasks(params.projectId)
       }
     );
   }
 
   openCreatingTaskPage(){
-    this.router.navigate(['/task-creation']);
+    this.router.navigate(['/task-creation'], {
+      queryParams: {
+        projectId: this.projectId
+      }
+    });
   }
 
   get tasks(){

@@ -22,4 +22,8 @@ export class UsersService {
       }
     })
   }
+
+  getUserByName(name: string): User | undefined{
+    return this.users.find((user: User) => user.name === name)
+  }
 }
