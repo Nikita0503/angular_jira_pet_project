@@ -47,3 +47,14 @@
   align-self: flex-end;
   margin-bottom: 20px;
 }
+
+.icon{
+  margin-top: 5px;
+  margin-left: 5px;
+  transition: 300ms;
+}
+
+.icon:hover{
+  color: rgb(199, 29, 29);
+  transition: 300ms;
+}

@@ -1,4 +1,5 @@
-import { TasksService } from './../../shared/tasks.service';
+import { CommonService } from './../../shared/common.service';
+import { Task, TasksService } from './../../shared/tasks.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -12,6 +13,7 @@ export class TaskListComponent implements OnInit {
   projectId?: number;
 
   constructor(private route: ActivatedRoute,
+    private commonService: CommonService,
     private tasksService: TasksService,
     private router: Router) { }
 
@@ -34,6 +36,11 @@ export class TaskListComponent implements OnInit {
 
   get tasks(){
     return this.tasksService.tasks
+  }
+
+  deleteTask(task: Task){
+    this.tasksService.deleteTask(this.projectId!, task.id);
+    this.commonService.showSnakeMessage('Task deleted successfully')
   }
 
 }
