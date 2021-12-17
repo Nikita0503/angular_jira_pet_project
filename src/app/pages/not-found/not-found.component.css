@@ -1,6 +1,6 @@
 .not_found{
     position: absolute;
-	display: flex;
+	  display: flex;
     top: 70px;
     bottom: 0;
     left: 0;
@@ -18,8 +18,9 @@
 }
 
 .not_found__text{
-    padding: 15px;
     border-radius: 15px;
     background-color: #FF9903;
     text-align: center;
-}
+    height: 100px;
+    padding-top: 70px;
+  }

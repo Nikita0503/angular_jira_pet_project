@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="task_details_container">
+    <h1>Task details</h1>
+    <div class="general_data_container">
+      <h2>{{task?.title}}</h2>
+      <div class="task_info">
+        <span class="task_user">{{task?.user?.name}}</span>
+        <span [ngStyle]="{'background-color': task?.status?.color}" class="task_status">{{task?.status?.title}}</span>
+        <span [ngStyle]="{'background-color': task?.type?.color}" class="task_type">{{task?.type?.title}}</span>
+      </div>
+      <div *ngIf="task?.timeAllotted" class="progress_bar_container">
+        <div class="progress_bar_time">
+          <span>{{timeTracked! | time}}</span>
+          <span>{{task?.timeAllotted! | time}}</span>
+        </div>
+        <mat-progress-bar class="progress_bar" mode="determinate" value={{progress}}></mat-progress-bar>
+      </div>
+      <span>{{task?.description}}</span>
+      <div class="files_container">
+        <div *ngFor="let file of task?.files" class="file_list_item" (click)="openFile(file)">
+          <img class="file_list_item__image" [src]="apiUrl + file.name">
+          <div class="file_list_item__open">
+            <span>Open</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

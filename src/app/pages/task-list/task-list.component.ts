@@ -34,6 +34,15 @@ export class TaskListComponent implements OnInit {
     });
   }
 
+  openTaskDetails(task: Task){
+    this.router.navigate(['/task-details'], {
+      queryParams: {
+        projectId: this.projectId,
+        taskId: task.id
+      }
+    });
+  }
+
   get tasks(){
     return this.tasksService.tasks
   }

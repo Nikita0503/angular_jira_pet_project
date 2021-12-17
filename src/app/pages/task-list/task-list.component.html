@@ -1,5 +1,4 @@
 <div class="container">
-
   <div class="task_list_container">
     <h1>Tasks</h1>
   <button
@@ -9,7 +8,7 @@
   <div>
     <mat-selection-list #taskList [multiple]="false">
       <mat-list-option *ngFor="let task of tasks" [value]="task">
-        <div class="task">
+        <div class="task" (click)="openTaskDetails(task)">
           <span>{{task.title}}</span>
           <div class="task_info">
             <span class="task_user">{{task.user?.name}}</span>

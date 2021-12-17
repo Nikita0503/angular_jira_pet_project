@@ -34,6 +34,9 @@ import { ProjectMembersComponent } from './components/dialogs/project-members/pr
 import { UsersNotInProjectPipe } from './shared/pipes/users-not-in-project.pipe';
 import { TaskListComponent } from './pages/task-list/task-list.component';
 import { CreateTaskComponent } from './pages/create-task/create-task.component';
+import { TaskDetailsComponent } from './pages/task-details/task-details.component';
+import { ImageComponent } from './components/dialogs/image/image.component';
+import { TimePipe } from './shared/pipes/time.pipe';
 
 @NgModule({
   declarations: [
@@ -52,6 +55,9 @@ import { CreateTaskComponent } from './pages/create-task/create-task.component';
     UsersNotInProjectPipe,
     TaskListComponent,
     CreateTaskComponent,
+    TaskDetailsComponent,
+    ImageComponent,
+    TimePipe,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,94 @@
+.container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.task_details_container{
+  margin-top: 50px;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+}
+
+.task_info{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.task_status{
+  margin-right: 10px;
+  padding: 3px;
+  padding-right: 5px;
+  padding-left: 5px;
+  border-radius: 5px;
+}
+
+.task_type{
+  padding: 3px;
+  padding-right: 5px;
+  padding-left: 5px;
+  border-radius: 5px;
+}
+
+.task_user{
+  margin-right: 10px;
+}
+
+.file_list_item{
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+  background-color: #8c94c2;
+  color: #fff;
+  font-size: 30px;
+  box-shadow: 0 3px 5px 0 rgb(0 0 0 / 30%);
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.file_list_item__image{
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.file_list_item__open{
+  width: 100px;
+  height: 100px;
+  background-color: #5f5f5f;
+  cursor: pointer;
+  position: relative;
+  top: -100px;
+  border-radius: 5px;
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 300ms;
+}
+
+.files_container{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.file_list_item__open:hover{
+  opacity: 0.5;
+  transition: 300ms;
+}
+
+.progress_bar_time{
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.progress_bar_container{
+  height: 50px;
+  width: 35%;
+}
