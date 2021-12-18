@@ -37,6 +37,8 @@ import { CreateTaskComponent } from './pages/create-task/create-task.component';
 import { TaskDetailsComponent } from './pages/task-details/task-details.component';
 import { ImageComponent } from './components/dialogs/image/image.component';
 import { TimePipe } from './shared/pipes/time.pipe';
+import { CommentsComponent } from './components/comments/comments.component';
+import { CommentsPipe } from './shared/pipes/comments.pipe';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,8 @@ import { TimePipe } from './shared/pipes/time.pipe';
     TaskDetailsComponent,
     ImageComponent,
     TimePipe,
+    CommentsComponent,
+    CommentsPipe,
   ],
   imports: [
     BrowserModule,

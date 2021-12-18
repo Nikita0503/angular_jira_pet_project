@@ -48,8 +48,9 @@ export class TaskListComponent implements OnInit {
   }
 
   deleteTask(task: Task){
-    this.tasksService.deleteTask(this.projectId!, task.id);
-    this.commonService.showSnakeMessage('Task deleted successfully')
+    this.tasksService.deleteTask(this.projectId!, task.id, () => {
+      this.commonService.showSnakeMessage('Task deleted successfully')
+    });
   }
 
 }

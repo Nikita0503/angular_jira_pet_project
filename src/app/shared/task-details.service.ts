@@ -16,6 +16,5 @@ export class TaskDetailsService {
         this.task = item;
       }
     })
-    console.log(this.task)
   }
 }

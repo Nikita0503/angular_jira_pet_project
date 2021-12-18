@@ -1,0 +1,52 @@
+<div class="comments_container">
+  <h3>Comments:</h3>
+  <div class="new_comment_container">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Leave a comment</mat-label>
+      <textarea
+        [(ngModel)]="message"
+        matInput
+        placeholder="Your comment..."></textarea>
+    </mat-form-field>
+    <div class="files_container">
+      <label class="file_picker">
+        <span>+</span>
+        <input (change)="onPickFile($event)" type="file" class="form__picker" placeholder="Upload file" accept=".png,.jpeg,.jpg,.gif">
+      </label>
+      <div *ngFor="let attachment of attachments" class="file_list_item" (click)="deleteFile(attachment)">
+        <img class="file_list_item__image" [src]="attachment.url">
+        <div class="file_list_item__open">
+          <span>Delete</span>
+        </div>
+      </div>
+    </div>
+    <button
+      mat-raised-button color="primary"
+      [disabled]="isValid"
+      (click)="sendComment()">Save</button>
+  </div>
+  <div class="comment_list">
+    <div *ngFor="let comment of comments | comments" class="comment_container">
+      <div class="comment_header">
+        <div class="author_container">
+          <img class="author_avatar" [src]="apiUrl + comment.user.avatar"/>
+          <div class="author_data">
+            <span class="author_name">{{comment.user.name}}</span>
+            <span class="comment_date">{{comment.createdAt | date: 'medium' }}</span>
+          </div>
+        </div>
+        <div *ngIf="isDeletable(comment)" (click)="deleteComment(comment)">
+          <mat-icon class="icon" aria-hidden="false" aria-label="Example home icon">delete_outline</mat-icon>
+        </div>
+      </div>
+    <span>{{comment.message}}</span>
+    <div class="files_container">
+      <div *ngFor="let file of comment?.files" class="file_list_item" (click)="openFile(file)">
+        <img class="file_list_item__image" [src]="apiUrl + file.name">
+        <div class="file_list_item__open">
+          <span>Open</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

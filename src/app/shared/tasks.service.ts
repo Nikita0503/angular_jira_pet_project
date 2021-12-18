@@ -63,12 +63,13 @@ export class TasksService {
       })
   }
 
-  deleteTask(projectId: number, taskId: number){
+  deleteTask(projectId: number, taskId: number, onSuccess: Function){
     this.httpClient.delete<any>(environment.apiUrl + `projects/${projectId}/tasks/${taskId}`)
       .subscribe({
         next: (response: any) => {
           if(response.deleted){
             this.tasks = this.tasks.filter((task: Task) => task.id != taskId);
+            onSuccess();
           }
         }
       })

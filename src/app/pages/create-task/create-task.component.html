@@ -77,7 +77,8 @@
 
         <div class="actions_container">
           <button
-            mat-button color="primary">Cancel</button>
+            mat-button color="primary"
+            (click)="goToPreviousPage()">Cancel</button>
           <button
             (click)="createNewTask()"
             [disabled]="creatingForm.invalid"

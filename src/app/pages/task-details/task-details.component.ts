@@ -1,3 +1,4 @@
+import { Attachment } from './../create-task/create-task.component';
 import { ImageComponent } from './../../components/dialogs/image/image.component';
 import { MatDialog } from '@angular/material/dialog';
 import { TaskDetailsService } from './../../shared/task-details.service';
@@ -13,6 +14,9 @@ import { environment } from 'src/environments/environment';
 })
 export class TaskDetailsComponent implements OnInit {
 
+  projectId?: number;
+  taskId?: number;
+
   constructor(private route: ActivatedRoute,
     private taskDetailsService: TaskDetailsService,
     public dialog: MatDialog) { }
@@ -20,8 +24,9 @@ export class TaskDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams
       .subscribe(params => {
-        console.log("params", params)
         this.taskDetailsService.fetchTaskById(params.taskId);
+        this.projectId = params.projectId;
+        this.taskId = params.taskId;
       }
     );
   }
@@ -50,4 +55,5 @@ export class TaskDetailsComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe();
   }
+
 }

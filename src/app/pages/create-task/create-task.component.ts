@@ -94,6 +94,10 @@ export class CreateTaskComponent implements OnInit {
     this.attachments = this.attachments.filter((item: Attachment) => item.url !== attachment.url)
   }
 
+  goToPreviousPage(){
+    this.location.back();
+  }
+
   createNewTask(){
     const title = this.creatingForm.get('title')?.value
     const description = this.creatingForm.get('description')?.value
