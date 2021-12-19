@@ -53,4 +53,13 @@ export class TaskListComponent implements OnInit {
     });
   }
 
+  openTaskEditing(task: Task){
+    this.router.navigate(['/task-editing'], {
+      queryParams: {
+        projectId: this.projectId,
+        taskId: task.id
+      }
+    })
+  }
+
 }

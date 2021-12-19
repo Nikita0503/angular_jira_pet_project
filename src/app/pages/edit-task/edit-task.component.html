@@ -1,8 +1,8 @@
 <div class="container">
   <div class="task_creation_container">
-    <h1>Task creation</h1>
+    <h1>Task editing</h1>
     <div>
-      <form [formGroup]="creatingForm" class="example-form">
+      <form [formGroup]="editingForm" class="example-form">
         <mat-form-field class="example-full-width" appearance="fill">
           <mat-label>Title</mat-label>
           <input formControlName="title" matInput>
@@ -17,7 +17,7 @@
             #autosize="cdkTextareaAutosize"
             cdkAutosizeMinRows="1"
             cdkAutosizeMaxRows="5"
-            matInput placeholder="Some task details..."></textarea>
+            matInput placeholder="Some task details...">{{editingForm.get('description')?.value}}</textarea>
         </mat-form-field>
 
         <div class="task_info">
@@ -53,11 +53,23 @@
         <div class="time_container">
           <mat-form-field appearance="fill">
             <mat-label>Hours</mat-label>
-            <input formControlName="hours" type="number" matInput>
+            <input formControlName="hoursAllotted" type="number" matInput>
           </mat-form-field>
           <mat-form-field appearance="fill">
             <mat-label>Minutes</mat-label>
-            <input formControlName="minutes" type="number" min="0" max="59" matInput>
+            <input formControlName="minutesAllotted" type="number" min="0" max="59" matInput>
+          </mat-form-field>
+        </div>
+
+        <h4>Tracked time</h4>
+        <div class="time_container">
+          <mat-form-field appearance="fill">
+            <mat-label>Hours</mat-label>
+            <input formControlName="hoursTracked" type="number" matInput>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Minutes</mat-label>
+            <input formControlName="minutesTracked" type="number" min="0" max="59" matInput>
           </mat-form-field>
         </div>
 
@@ -68,7 +80,14 @@
             <input type="file" class="form__picker" (change)="onPickFile($event)" placeholder="Upload file" accept=".png,.jpeg,.jpg,.gif">
           </label>
 
-          <div *ngFor="let attachment of attachments" class="file_list_item" (click)="deleteFile(attachment)">
+          <div *ngFor="let attachment of oldAttachments" class="file_list_item" (click)="deleteOldAttachment(attachment)">
+            <img class="file_list_item__image" [src]="apiUrl + attachment.name">
+            <div class="file_list_item__delete">
+              <span>Delete</span>
+            </div>
+          </div>
+
+          <div *ngFor="let attachment of newAttachments" class="file_list_item" (click)="deleteFile(attachment)">
             <img class="file_list_item__image" [src]="attachment.url">
             <div class="file_list_item__delete">
               <span>Delete</span>
@@ -81,8 +100,8 @@
             mat-button color="primary"
             (click)="goToPreviousPage()">Cancel</button>
           <button
-            (click)="createNewTask()"
-            [disabled]="creatingForm.invalid"
+            (click)="editTask()"
+            [disabled]="editingForm.invalid"
             class="create_task_button"
             mat-raised-button color="primary">Save</button>
         </div>

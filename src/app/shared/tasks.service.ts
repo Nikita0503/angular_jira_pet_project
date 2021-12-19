@@ -31,27 +31,7 @@ export class TasksService {
 
   constructor(private httpClient: HttpClient,
     ) {
-    this.tasks = [{
-      id: 1,
-      title: 'task',
-      status: {
-        id: 1,
-        title: 'qwe',
-        color: '#F0F0F0'
-      },
-      type: {
-        id: 1,
-        title: 'asd',
-        color: '#F0F0F0'
-      },
-      user: {
-        id: 1,
-        email: 'qwe@qwe.com',
-        name: 'name',
-        role: 'USER',
-        avatar: ''
-      }
-    }];
+    this.tasks = [];
   }
 
   fetchAllTasks(projectId: number){

@@ -1,3 +1,4 @@
+import { EditTaskComponent } from './pages/edit-task/edit-task.component';
 import { TaskDetailsComponent } from './pages/task-details/task-details.component';
 import { CreateTaskComponent } from './pages/create-task/create-task.component';
 import { TaskListComponent } from './pages/task-list/task-list.component';
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'tasks', component: TaskListComponent},
   {path: 'task-creation', component: CreateTaskComponent},
   {path: 'task-details', component: TaskDetailsComponent},
+  {path: 'task-editing', component: EditTaskComponent},
   {path: '**', component: NotFoundComponent}
 ];
 

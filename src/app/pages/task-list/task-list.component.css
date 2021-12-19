@@ -54,7 +54,12 @@
   transition: 300ms;
 }
 
-.icon:hover{
+.icon_delete:hover{
   color: rgb(199, 29, 29);
+  transition: 300ms;
+}
+
+.icon_edit:hover{
+  color: rgb(199, 182, 29);
   transition: 300ms;
 }

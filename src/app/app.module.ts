@@ -39,6 +39,7 @@ import { ImageComponent } from './components/dialogs/image/image.component';
 import { TimePipe } from './shared/pipes/time.pipe';
 import { CommentsComponent } from './components/comments/comments.component';
 import { CommentsPipe } from './shared/pipes/comments.pipe';
+import { EditTaskComponent } from './pages/edit-task/edit-task.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { CommentsPipe } from './shared/pipes/comments.pipe';
     TimePipe,
     CommentsComponent,
     CommentsPipe,
+    EditTaskComponent,
   ],
   imports: [
     BrowserModule,

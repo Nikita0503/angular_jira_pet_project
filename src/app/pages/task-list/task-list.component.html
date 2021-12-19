@@ -14,8 +14,11 @@
             <span class="task_user">{{task.user?.name}}</span>
             <span [ngStyle]="{'background-color': task.status.color}" class="task_status">{{task.status.title}}</span>
             <span [ngStyle]="{'background-color': task.type.color}" class="task_type">{{task.type.title}}</span>
+            <div (click)="openTaskEditing(task)">
+              <mat-icon class="icon icon_edit" aria-hidden="false" aria-label="Example home icon">edit_outline</mat-icon>
+            </div>
             <div (click)="deleteTask(task)">
-              <mat-icon class="icon" aria-hidden="false" aria-label="Example home icon">delete_outline</mat-icon>
+              <mat-icon class="icon icon_delete" aria-hidden="false" aria-label="Example home icon">delete_outline</mat-icon>
             </div>
           </div>
         </div>
