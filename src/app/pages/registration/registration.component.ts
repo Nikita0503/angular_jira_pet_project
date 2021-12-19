@@ -1,3 +1,4 @@
+import { CommonService } from './../../shared/common.service';
 import { RegistrationData } from './../../shared/user.service';
 import { AuthService } from './../../shared/auth.service';
 import { FormBuilder, FormGroup, ValidatorFn, Validators, AbstractControl, ValidationErrors, FormControl, FormGroupDirective, NgForm } from '@angular/forms';
@@ -5,6 +6,7 @@ import { Component, EventEmitter, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorStateMatcher } from '@angular/material/core';
 import CustomFormValidators from 'src/app/validators/index'
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-registration',
@@ -20,6 +22,8 @@ export class RegistrationComponent {
   registrationForm: FormGroup;
 
   constructor(private fb: FormBuilder,
+      private location: Location,
+      private commonService: CommonService,
       private authService: AuthService) {
         this.registrationForm = this.fb.group({
           name: ['', [Validators.required, CustomFormValidators.noWhitespaceValidator]],
@@ -65,7 +69,14 @@ export class RegistrationComponent {
         role: this.registrationForm.get('role')?.value,
         avatar: this.avatar
       }
-      this.authService.registration(this.registrationData)
+      this.authService.registration(this.registrationData,
+        () => {
+          this.location.back();
+          this.commonService.showSnakeMessage("Registration completed successfully");
+        },
+        (error: string) => {
+          this.commonService.showSnakeMessage(error);
+        })
     }
 }
 

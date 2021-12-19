@@ -30,7 +30,7 @@ export class AuthService {
       })
   }
 
-  registration(registrationData: RegistrationData){
+  registration(registrationData: RegistrationData, onSuccess: Function, onFailure: Function){
     const formData: FormData = new FormData();
     formData.append('email', registrationData.email)
     formData.append('password', registrationData.password)
@@ -40,10 +40,10 @@ export class AuthService {
     this.httpClient.post<any>(environment.apiUrl + 'users/registration/', formData)
     .subscribe({
       next: (response: any) => {
-        console.log("RESPONSE", response)
+        onSuccess();
       },
       error: (e) => {
-        console.log("ERROR", e)
+        onFailure(e.error.message)
       }
     })
   }
