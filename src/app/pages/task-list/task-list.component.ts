@@ -1,3 +1,4 @@
+import { UserService } from './../../shared/user.service';
 import { CommonService } from './../../shared/common.service';
 import { Task, TasksService } from './../../shared/tasks.service';
 import { Component, OnInit } from '@angular/core';
@@ -13,6 +14,7 @@ export class TaskListComponent implements OnInit {
   projectId?: number;
 
   constructor(private route: ActivatedRoute,
+    private userService: UserService,
     private commonService: CommonService,
     private tasksService: TasksService,
     private router: Router) { }
@@ -24,6 +26,10 @@ export class TaskListComponent implements OnInit {
         this.tasksService.fetchAllTasks(params.projectId)
       }
     );
+  }
+
+  get isAdmin(){
+    return this.userService.user?.role! === 'ADMIN'
   }
 
   openCreatingTaskPage(){

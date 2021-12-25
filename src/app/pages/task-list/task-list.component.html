@@ -2,6 +2,7 @@
   <div class="task_list_container">
     <h1>Tasks</h1>
   <button
+      *ngIf="isAdmin"
       (click)="openCreatingTaskPage()"
       class="create_task_button"
       mat-raised-button color="primary">Add task</button>
@@ -17,7 +18,7 @@
             <div (click)="openTaskEditing(task)">
               <mat-icon class="icon icon_edit" aria-hidden="false" aria-label="Example home icon">edit_outline</mat-icon>
             </div>
-            <div (click)="deleteTask(task)">
+            <div *ngIf="isAdmin" (click)="deleteTask(task)">
               <mat-icon class="icon icon_delete" aria-hidden="false" aria-label="Example home icon">delete_outline</mat-icon>
             </div>
           </div>

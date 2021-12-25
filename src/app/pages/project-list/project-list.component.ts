@@ -25,6 +25,10 @@ export class ProjectListComponent implements OnInit {
     this.projectsService.fetchAllProjects();
   }
 
+  get isAdmin(){
+    return this.userService.user?.role! === 'ADMIN'
+  }
+
   get projects(){
     return this.projectsService.projects
   }
